@@ -1,0 +1,200 @@
+<!--Waluigi's Taco Stand (Random Walk Algorithm)
+By Owen and Kevin and Jatin
+Mr. Krnic
+May 7, 2018
+This is the help page Waluigi's Taco Stand
+Also has all the info about the algorithm-->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head> 
+		<title> 
+			ICS4U Assignment #3 
+		</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		<script src="js/scripts.js"></script>
+	</head>
+	<body>
+		<div id="main">
+			<!--Header div, this is the first thing the user sees.-->
+			<div class="header">
+				<h1>
+					<span style="color: #863396">W</span><span style="color: #59bd48">a</span><span style="color: #ebcc1c">l</span><span style="color: #21aacc">u</span><span style="color: #59bd48">i</span><span style="color: #863396">g</span><span style="color: #ebcc1c">i</span><span style="color: #59bd48">'</span><span style="color: #21aacc">s</span>
+				</h1>
+				<h6 style="color: #451110; font-size: 80px">
+					Taco Stand
+				</h6> 
+
+				<br>
+			</div>
+
+			<!--Bar with Mario running across the screen-->	
+			<div id="navbar" class="navbar">				
+				<div class="navWrapper">
+					<span class="navButton" style="font-size:30px;cursor:pointer;left: 0;" onclick="location.href = 'http://www.sdsscomputers.com/OwenGoodwin/UNITS/UNIT3';"><i" class="fa fa-laptop"></i></span></a>
+					<span class="navButton" style="font-size:30px;cursor:pointer;left: 70px;" onclick="location.href = 'index.html';"><i" class="fa fa-home"></i></span></a>
+					<span class="navButton" style="font-size:30px;cursor:pointer;left: 140px;" onclick="location.href = 'download.html';"><i" class="fa fa-download"></i></span></a>
+					<span class="navButton" style="font-size:30px;cursor:pointer;left: 210px;" onclick="location.href = 'gallery.html';"><i" class="fa fa-image"></i></span></a>
+					<span class="navButton" style="font-size:30px;cursor:pointer;left: 280px;" onclick="location.href = 'help.html';"><i" class="fa fa-question-circle-o"></i></span></a>
+					<span class="navButton" style="font-size:30px;cursor:pointer;left: 350px;" onclick="alert('peace');"><i" class="fa fa-hand-peace-o"></i></span></a>
+				</div>
+
+
+			</div>
+
+			<br>
+			
+
+			<!--Main page content-->
+			<div class="content">
+				<h2 style="text-align: center">Here is everything you need to know about the Random Walk Algorithm, the algorithm behind the game!</h2>
+				<hr>
+				<p style="font-family: 'Segoe UI'; font-size: 16px; text-align: left;">The Random Walk Algorithm is a simple map-generating algorithm that uses a grid to simulate the making of pathways, or as we call them in our code, tunnels. The algorithm will start at a random spot on the grid, travel in a random direction for a random length, and then turn and repeat the process until the desired map is complete. This algorithm can be very useful in 2D tilemap games, like a dungeon-solving puzzle game or a maze game.</p>
+				<hr>
+				<div class = "table">
+				<h3>IPO</h3>
+					<center>
+						<table>
+							<tr>
+								<th>Input</th>
+								<th>Processing</th>
+								<th>Output</th>
+							</tr>
+							<tr>
+								<td>
+									Dimensions of the square grid
+									<br>
+									We keep ours as 15
+								</td>
+								<td>
+									Create a 2D array with the dimensions
+									<br>
+									Set every single spot in the array to 0 to start
+								</td>
+								<td>A nicely formatted 2D array of 0s (walls) and 1s (floors)</td>
+							</tr>
+							<tr>
+								<td>
+									Maximum number of tunnels to make
+									<br>
+									Determines how complex the map is, we use 50
+								</td>
+								<td>
+									Choose a random direction (←, ↑, →, ↓)
+									<br>
+									Choose a random x-y position as our start
+								</td>
+								<td>
+									Following this, we do our "Extended Random Walk Algorithm" by selecting random floor spots, and turning them into spawn points for the player, customer, and the 6 tacos
+									<br>
+									See the bottom 3 rows of the flowchart below
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Maximum length a tunnel can be
+									<br>
+									We choose a random length between 2 and 5, this means levels can be either really small or large for good contrast
+								</td>
+								<td>
+									Set current x-y spot to 1, move ahead 1 spot in whichever direction we chose
+									<br>
+									Repeat tunneling as many times as the max. tunnel length
+									<br>
+									Check each time we move ahead to see if we're going out of bounds, and if we are stop the tunnel early
+								</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									Choose a new direction that's perpendicular to the last and repeat the process of making a tunnel until we have reached the maximum number of tunnels.
+								</td>
+								<td></td>
+							</tr>
+						</table>
+					</center>
+				</div>
+				<hr>
+				<h3>Flowchart</h3>
+				<img src="img/flowchart.png" width="100%">
+				<hr>
+				<h3>Pseudocode</h3>
+				<p style="font-family: 'Segoe UI'; font-size: 12px; text-align: left;">
+					Get <b>dimensions</b> (these 3 can be whatever you want)<br>
+					Get <b>maxTunnels</b><br>
+					Get <b>maxLength</b><br>
+					<b>Directions</b>  =  {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}<br>
+					<b>map</b> = 0 (it’s a 2d array, everything starts at 0) <br>
+					<b>currentRow</b> = random less than dimensions<br>
+					<b>currentColumn</b> = random less than dimensions<br>
+
+					while(<b>maxTunnels</b> > 0)<br>
+						while(<b>RandomDirection</b> is perpendicular to <b>LastDirection</b>)<br>
+							*We’ll figure out how to do this condition in the actual code*<br>
+							<b>RandomDirection</b> = <b>directions</b>[random between 0 and 3]<br>
+								<b>RandomLength</b> = random between 1 and maxLength<br>
+								<b>TunnelLength</b> = 0<br>
+						while (<b>TunnelLength</b> < <b>RandomLength</b>)<br>
+							If <b>currentRow</b> is 0 and <b>RandomDirection</b> is -1 stop<br>
+							If <b>currentColumn</b> is 0 and <b>RandomDirection</b> is -1 stop<br>
+							If <b>currentRow</b> is <b>dimensions</b> and <b>RandomDirection</b> is 1 stop<br>
+							If <b>currentRow</b> is <b>dimensions</b>  and <b>RandomDirection</b> is 1 stop<br>
+					Else<br> 
+						<b>map</b>[<b>currentRow</b>][<b>currentColumn</b>] = 1 <br>
+						Add <b>RandomDirection</b>[0] to <b>currentRow</b><br>
+						Add <b>RandomDirection</b>[1] to <b>currentColumn</b><br>
+						Add 1 to <b>TunnelLength</b><br>
+					If <b>tunnelLength</b> equals <b>maxLength</b><br>
+						<b>LastDirection</b> = <b>RandomDirection</b><br>
+						Subtract 1 from <b>maxTunnels</b><br><br>
+						<b style="color: red">*Everything below here is the Extended Random Walk, the stuff that adds all of our extra stuff to the map. Check out the last 3 rows of the flowchart.*</b><br><br>
+						
+
+					<b>PlayerSpawned</b> = false<br>
+					<b>CustomerSpawned</b> = false<br>
+					<b>tacoCount</b> = 4<br>
+
+					While (player isn’t spawned)<br>
+						<b>Xcoordinate</b> = random less than <b>dimensions</b><br>
+						<b>Ycoordinate</b> = random less than <b>dimensions</b><br>
+						If <b>map</b>[<b>Xcoordinate</b>][<b>Ycooordinate</b>] is 1<br>
+							<b>map</b>[<b>Xcooordinate</b>][<b>Ycooordinate</b>] = 2<br>
+							<b>PlayerSpawned</b> = true<br>
+					While (customer isn’t spawned)<br>
+						<b>Xcoordinate</b> = random less than <b>dimensions</b><br>
+						<b>Ycoordinate</b> = random less than <b>dimensions</b><br>
+						If <b>map</b>[<b>Xcoordinate</b>][<b>Ycooordinate</b>] is 1<br>
+							<b>map</b>[<b>Xcooordinate</b>][<b>Ycooordinate</b>] = 3<br>
+							<b>CustomerSpawned</b> = true<br>
+					While (<b>tacoCount</b> isn’t 10)<br>
+						<b>Xcoordinate</b> = random less than <b>dimensions</b><br>
+						<b>Ycoordinate</b> = random less than <b>dimensions</b><br>
+						If <b>map</b>[<b>Xcoordinate</b>][<b>Ycooordinate</b>] is 1<br>
+							<b>map</b>[<b>Xcooordinate</b>][<b>Ycooordinate</b>] = <b>tacoCount</b><br>
+							<b>tacoCount </b>goes up 1	<br>
+					Return <b>map</b><br>
+				</p>
+				<hr>
+				<h3>More info about the Random Walk Algorithm</h3>
+				<p style="font-family: 'Segoe UI'; font-size: 16px; text-align: center;"><a href="https://medium.freecodecamp.org/how-to-make-your-own-procedural-dungeon-map-generator-using-the-random-walk-algorithm-e0085c8aa9a">Link</a></p>
+				<hr>
+				<h3>How to actually play the game!</h3>
+				<p style="font-family: 'Segoe UI'; font-size: 16px; text-align: left;">Use the arrow keys to move Waluigi, and once you've collected all of the tacos Mario wants, press Enter to serve them to him!</p>
+				
+			</div>			
+
+			<!--Standard footer for all pages, with some navigation buttons as well.-->
+			<div class="footer">
+				<p> 					
+					This page was last updated on <b>05/05/18 at <a href="https://www.youtube.com/watch?v=AZm1_jtY1SQ" style="color:white;">21:12</a> </b>
+				</p>
+			</div>
+		</div>
+	</body>
+</html>

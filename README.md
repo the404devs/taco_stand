@@ -9,4 +9,4 @@ i'm still very proud of the movement system i designed, very similar to cs17's
 
 Made with Kevin and Jatin
 
-https://the404devs.github.io/taco_stand
+https://wts.the404.nl
